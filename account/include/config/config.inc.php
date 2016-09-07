@@ -35,7 +35,7 @@ $DATABASE_LIST[SAMPLE_DB_ID] = array (
 	'port' => '3306',
 	'username' => 'root',
 	'password' => '',
-	'db_name' => 'osadmin');
+	'db_name' => 'otaku');
 
 
 // COOKIE 加密密钥，建议修改
@@ -43,6 +43,7 @@ define('OSA_ENCRYPT_KEY','whatafuckingday!');
 
 // prefix 不要更改，除非修改 osadmin.sql 文件中的所有表名
 define('OSA_TABLE_PREFIX' ,'osa_');
+define('OTK_TABLE_PREFIX' ,'otk_');
 
 // 页面设置
 define('DEBUG' ,false);
