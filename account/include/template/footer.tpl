@@ -1,7 +1,7 @@
 					<footer>
                         <hr>
-                        <p class="pull-right">A <a href="http://osadmin.org/" target="_blank">Basic Backstage Management System for China Only.</a> by <a href="http://weibo.com/osadmin" target="_blank">SomewhereYu</a>. 安卓应用【<a href="http://app.herobig.com" target="_blank">短信卫士</a>】</p>
-                        <p>&copy; 2013 <a href="http://osadmin.org" target="_blank">OSAdmin</a></p>
+                        <p class="pull-right"><a href="https://github.com/moonrailgun/otaku-for-cordova" target="_blank">Otaku!</a> copyright by <a href="http://www.moonrailgun.com" target="_blank">@moonrailgun</a>. </p>
+                        <p>&copy; 2016 base with <a href="https://github.com/goglezon/OSAdmin" target="_blank">OSAdmin</a></p>
                     </footer>
 				</div>
 			</div>
