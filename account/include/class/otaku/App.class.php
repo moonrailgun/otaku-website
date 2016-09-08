@@ -24,4 +24,13 @@ class App extends OtakuBase
         }
         return array();
     }
+
+    public static function createApp($app_info){
+        if (! $app_info || ! is_array ( $app_info )) {
+            return false;
+        }
+        $db=self::__instance();
+        $id = $db->insert ( self::getTableName(), $app_info );
+        return $id;
+    }
 }
