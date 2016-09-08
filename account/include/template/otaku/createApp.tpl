@@ -13,7 +13,7 @@
 	
 	<div id="myTabContent" class="tab-content">
 		<div class="tab-pane active in" id="home">
-		<form id="tab" method="post" action="" autocomplete="off">
+		<form id="tab" method="post" action="" autocomplete="off" enctype="multipart/form-data">
 			<input type="hidden" name="owner_id" value="<{$userInfo.user_id}>">
 			<label>应用名称</label>
 			<input type="text" name="app_name" value="<{$_POST.app_name}>" class="input-xlarge" autofocus="true" required="true" >
