@@ -1,4 +1,5 @@
-account/include/compiled/*
+admin/include/compiled/*
+admin/upload/*
 
 #################
 ## Eclipse
