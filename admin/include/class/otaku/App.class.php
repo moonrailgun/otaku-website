@@ -25,9 +25,10 @@ class App extends OtakuBase
         return array();
     }
 
-    public static function getOwnerAppList(){
+    public static function getOwnerAppList()
+    {
         $db  = self::__instance();
-        $sql = "select " . self::$columns . " from " . self::getTableName(). " where owner_id=".UserSession::getUserId();
+        $sql = "select " . self::$columns . " from " . self::getTableName() . " where owner_id=" . UserSession::getUserId();
 
         $list = $db->query($sql)->fetchAll();
         if ($list) {
@@ -44,7 +45,7 @@ class App extends OtakuBase
         $db        = self::__instance();
         $condition = array("AND" => array("app_id[=]" => $app_id));
         $list      = $db->select(self::getTableName(), self::$columns, $condition);
-        
+
         if ($list) {
             return $list[0];
         }
@@ -61,15 +62,35 @@ class App extends OtakuBase
         return $id;
     }
 
-    public static function updateApp($app_id,$app_info){
+    public static function updateApp($app_id, $app_info)
+    {
         if (!$app_info || !is_array($app_info)) {
             return false;
         }
-        $db=self::__instance();
-        $condition=array("app_id"=>$app_id);
-        
-        $id = $db->update ( self::getTableName(), $app_info, $condition );
+        $db        = self::__instance();
+        $condition = array("app_id" => $app_id);
+
+        $id = $db->update(self::getTableName(), $app_info, $condition);
         return $id;
+    }
+
+    public static function delFile($file_path)
+    {
+        $fileRealPath = Common::getSystemDir() . $file_path;
+
+        if (is_file($fileRealPath)) {
+            if (unlink($fileRealPath)) {
+                //删除成功
+                return true;
+            } else {
+                if (chmod($fileRealPath, 0777)) {
+                    unlink($fileRealPath);
+                    return true;
+                } else {
+                    return false;
+                };
+            }
+        }
     }
 
     public static function delApp($app_id)
@@ -83,21 +104,12 @@ class App extends OtakuBase
         }
 
         //delete file
-        $filePath = Common::getSystemDir() . $info["app_file"];
-        if(is_file($filePath)){
-            unlink($filePath);
-        }else{
-            if(chmod($filePath,0777)){
-                unlink($filePath);
-            }else{
-                return false;
-            }
-        }
+        self::delFile($info["app_file"]);
 
         //delete data
-        $db=self::__instance();
-        $condition = array("app_id"=>$app_id);
-        $result = $db->delete (self::getTableName(), $condition);
+        $db        = self::__instance();
+        $condition = array("app_id" => $app_id);
+        $result    = $db->delete(self::getTableName(), $condition);
         return $result;
     }
 }

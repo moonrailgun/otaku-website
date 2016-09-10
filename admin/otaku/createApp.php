@@ -44,7 +44,6 @@ if (Common::isPost()) {
             }
         } else {
             //类型错误
-            var_dump($_FILES["file"]);
             OSAdmin::alert("error", ErrorMessage::ERROR_FILE_TYPE);
         }
     }
