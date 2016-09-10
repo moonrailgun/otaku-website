@@ -197,4 +197,9 @@ class Common {
 	public static function getSystemDir() {
 		return dirname(dirname(dirname(__FILE__)));
 	}
+
+	public static function isAdmin(){
+		//查询当前用户是否是管理员
+		return UserSession::getUserGroup() == 1;
+	}
 }

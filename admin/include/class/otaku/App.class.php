@@ -25,6 +25,17 @@ class App extends OtakuBase
         return array();
     }
 
+    public static function getOwnerAppList(){
+        $db  = self::__instance();
+        $sql = "select " . self::$columns . " from " . self::getTableName(). " where owner_id=".UserSession::getUserId();
+
+        $list = $db->query($sql)->fetchAll();
+        if ($list) {
+            return $list;
+        }
+        return array();
+    }
+
     public static function getAppInfoById($app_id)
     {
         if (!$app_id || !is_numeric($app_id)) {

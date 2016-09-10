@@ -14,9 +14,10 @@ if (empty($app_info)) {
 if (Common::isPost()) {
     //提交修改
     $info = App::getAppInfoById($app_id);
-    if ($info["owner_id"] != UserSession::getUserId()) {
+    if ($info["owner_id"] != UserSession::getUserId() && !Common::isAdmin()) {
         Common::exitWithError('不是你的应用,无法修改', Common::getActionUrl());
     }
+    
     if ($app_id == '' || $app_name == '' || $app_type == '' || $app_version == '') {
         OSAdmin::alert("error", ErrorMessage::NEED_PARAM);
     } else {

@@ -6,8 +6,8 @@ extract($_GET, EXTR_IF_EXISTS);
 
 if ($method == 'del' && !empty($app_id)) {
     $info = App::getAppInfoById($app_id);
-    if ($info["owner_id"] == UserSession::getUserId()) {
-        //是应用所有者
+    if ($info["owner_id"] == UserSession::getUserId() || Common::isAdmin()) {
+        //是应用所有者或管理员
         $result = App::delApp($app_id);
         if ($result >= 0) {
             SysLog::addLog(UserSession::getUserName(), 'DELETE', 'App', $app_id, "删除APP[" . $app_id . "]成功");
@@ -20,8 +20,14 @@ if ($method == 'del' && !empty($app_id)) {
     }
 }
 
-$allAppList   = App::getAllAppList();
-$isShowModify = UserSession::getUserGroup() == 1;
+if(Common::isAdmin()) {
+    //管理员能看见所有的应用
+    $allAppList   = App::getAllAppList();
+}else{
+    $allAppList   = App::getOwnerAppList();
+}
+
+$isShowModify = Common::isAdmin();
 $confirm_html = OSAdmin::renderJsConfirm("icon-remove");
 
 Template::assign('isShowModify', $isShowModify);
