@@ -76,4 +76,5 @@ $OSADMIN_CLASS_FOR_LOG = array(
 	'MenuUrl' => '功能',
 	'GroupRole' => '权限',
 	'QuickNote' => 'QuickNote',
+	'App'=>'应用'
 );

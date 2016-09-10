@@ -33,7 +33,7 @@ class User extends Base{
 						array("user_id[=]" => $user_id,
 						)
 					);
-		$list = $db->select ( self::getTableName(), self::$columns, $condition );
+		$list = $db->select(self::getTableName(), self::$columns, $condition );
 		
 		if ($list) {
 			$list[0]['login_time']=Common::getDateTime($list[0]['login_time']);
@@ -143,7 +143,7 @@ class User extends Base{
 	public static function checkActionAccess() {
 		$action_url = Common::getActionUrl();
 		
-		$res = checkActionAccessWithUrl($action_url);
+		$res = self::checkActionAccessWithUrl($action_url);
 		if(!$res){
 			//没有权限
 			Common::exitWithMessage ('您当前没有权限访问该功能，如需访问请联系管理员开通权限','index.php' );

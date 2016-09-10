@@ -193,4 +193,8 @@ class Common {
 	        return $uuid;
 	    }
 	}
+
+	public static function getSystemDir() {
+		return dirname(dirname(dirname(__FILE__)));
+	}
 }

@@ -15,9 +15,9 @@ class App extends OtakuBase
 
     public static function getAllAppList()
     {
-        $db   = self::__instance();
-        $sql  = "select ".self::$columns." from " . self::getTableName();
-        
+        $db  = self::__instance();
+        $sql = "select " . self::$columns . " from " . self::getTableName();
+
         $list = $db->query($sql)->fetchAll();
         if ($list) {
             return $list;
@@ -25,12 +25,57 @@ class App extends OtakuBase
         return array();
     }
 
-    public static function createApp($app_info){
-        if (! $app_info || ! is_array ( $app_info )) {
+    public static function getAppInfoById($app_id)
+    {
+        if (!$app_id || !is_numeric($app_id)) {
             return false;
         }
-        $db=self::__instance();
-        $id = $db->insert ( self::getTableName(), $app_info );
+        $db        = self::__instance();
+        $condition = array("AND" => array("app_id[=]" => $app_id));
+        $list      = $db->select(self::getTableName(), self::$columns, $condition);
+        
+        if ($list) {
+            return $list[0];
+        }
+        return array();
+    }
+
+    public static function createApp($app_info)
+    {
+        if (!$app_info || !is_array($app_info)) {
+            return false;
+        }
+        $db = self::__instance();
+        $id = $db->insert(self::getTableName(), $app_info);
         return $id;
+    }
+
+    public static function delApp($app_id)
+    {
+        if (!$app_id || !is_numeric($app_id)) {
+            return false;
+        }
+        $info = self::getAppInfoById($app_id);
+        if (!$info) {
+            return false;
+        }
+
+        //delete file
+        $filePath = Common::getSystemDir() . $info["app_file"];
+        if(is_file($filePath)){
+            unlink($filePath);
+        }else{
+            if(chmod($filePath,0777)){
+                unlink($filePath);
+            }else{
+                return false;
+            }
+        }
+
+        //delete data
+        $db=self::__instance();
+        $condition = array("app_id"=>$app_id);
+        $result = $db->delete (self::getTableName(), $condition);
+        return $result;
     }
 }
