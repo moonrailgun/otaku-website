@@ -143,14 +143,23 @@ class User extends Base{
 	public static function checkActionAccess() {
 		$action_url = Common::getActionUrl();
 		
-		
-		$user_info = UserSession::getSessionInfo();
-		
-		$role_menu_url = MenuUrl::getMenuByRole ( $user_info['user_role']);
-		
-		$search_result = in_array ( $action_url, $role_menu_url );
-		if (! $search_result) {
+		$res = checkActionAccessWithUrl($action_url);
+		if(!$res){
+			//没有权限
 			Common::exitWithMessage ('您当前没有权限访问该功能，如需访问请联系管理员开通权限','index.php' );
+			return true;
+		}
+	}
+
+	public static function checkActionAccessWithUrl($action_url){
+		$user_info = UserSession::getSessionInfo();
+		$role_menu_url = MenuUrl::getMenuByRole ( $user_info['user_role']);
+		$search_result = in_array ( $action_url, $role_menu_url );
+		if (!$search_result) {
+			//没有权限
+			return false;
+		}else{
+			//有权限
 			return true;
 		}
 	}
