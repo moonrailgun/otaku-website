@@ -202,4 +202,27 @@ class Common {
 		//查询当前用户是否是管理员
 		return UserSession::getUserGroup() == 1;
 	}
+
+	public static function clearDir($dirName){
+		//清空目录下所有文件
+	    // 判断是否为有效句柄
+	    if ($handle = opendir( $dirName )) {
+	        // 循环打开的句柄条目（打开成功，则返回文件名；打开失败，则返回false）
+	        while ( false !== ($item = readdir ($handle))) {
+	            if ($item != "." && $item != "..") {
+	                // 判断是否为目录
+	                if (is_dir($dirName . "/" . $item )) {
+	                    // 递归删除
+	                    self::clearDir($dirName . "/" . $item);
+	                } else {
+	                    if (unlink($dirName . "/" . $item)) {
+	                        //echo "成功删除{$dirName}文件夹下的{$item}文件";
+	                    }
+	                }
+	            }
+	        }
+	        // 关闭打开的句柄
+	        closedir( $handle );
+	    }
+	}
 }

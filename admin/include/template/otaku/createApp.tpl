@@ -19,7 +19,7 @@
 			<input type="text" name="app_name" value="<{$_POST.app_name}>" class="input-xlarge" autofocus="true" required="true" >
 			<label>应用类型</label>
 			<!-- <input type="text" name="app_type" value="<{$_POST.app_type}>" class="input-xlarge" required="true" > -->
-			<select name="app_type" class="input-xlarge" onchange="switchAppType(this.value)">
+			<select name="app_type" class="input-xlarge" onchange="switchAppType(this.value)" required="true">
 				<option value ="app">app</option>
 				<option value ="html">html</option>
 				<!-- <option value="fetch">fetch</option> -->

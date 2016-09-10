@@ -46,34 +46,9 @@ if (Common::isPost()) {
                 Common::exitWithError(ErrorMessage::NEED_PARAM, "otaku/createApp.php");
             }
 
-            $user_id = UserSession::getUserId();
-
-            $project_file_path = Common::getSystemDir() . "/temp/" . $user_id . "/" . $app_name . "/otaku.project.json";
-            if (!is_dir(dirname($project_file_path))) {
-                //目录不存在
-                //创建目录
-                if (!mkdir(dirname($project_file_path), 0777, true)) {
-                    Common::exitWithError("无法创建临时文件夹:" . $_FILES["file"]["error"], "otaku/createApp.php");
-                }
-            }
-            $project_file = fopen($project_file_path, "w");
-            $data         = array(
-                'name'        => $app_name,
-                'version'     => $app_version,
-                'type'        => $app_type,
-                'content'     => $app_url
-            );
-            fwrite($project_file, json_encode($data));
-            fclose($project_file);
-
-            $archive = new PHPZip();
-            $guid    = Common::guid();
-            $zipdir  = Common::getSystemDir() . "/temp/" . $user_id;
-            $zipfile = Common::getSystemDir() . "/upload/" . $guid . ".zip";
-            $archive->Zip($zipdir, $zipfile);
-
-            $input_data['app_file'] = "/upload/" . $guid . ".zip";
-            $input_data['app_size'] = filesize($zipfile);
+            $zip_path               = App::createHtmlAppZip($app_name, $app_url);
+            $input_data['app_file'] = $zip_path;
+            $input_data['app_size'] = filesize(Common::getSystemDir() . $zip_path);
         }
 
         $app_id = App::createApp($input_data);

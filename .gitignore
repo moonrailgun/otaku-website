@@ -1,5 +1,6 @@
 admin/include/compiled/*
 admin/upload/*
+admin/temp/*
 
 #################
 ## Eclipse
