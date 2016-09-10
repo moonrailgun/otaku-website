@@ -6,7 +6,7 @@ class App extends OtakuBase
     private static $table_name = 'app';
     // 查询字段
     //private static $columns = array('app_id', 'app_name', 'app_type', 'app_version', 'app_author', 'app_description', 'app_screenshots', 'app_file');
-    private static $columns = 'app_id,app_name,app_type,app_version,app_author,app_description,app_screenshots,app_file,app_size,app_createdTime,app_updatedTime';
+    private static $columns = 'app_id,app_name,app_type,app_version,app_author,app_icon,app_description,app_screenshots,app_file,app_size,app_createdTime,app_updatedTime';
 
     public static function getTableName()
     {
@@ -47,6 +47,17 @@ class App extends OtakuBase
         }
         $db = self::__instance();
         $id = $db->insert(self::getTableName(), $app_info);
+        return $id;
+    }
+
+    public static function updateApp($app_id,$app_info){
+        if (!$app_info || !is_array($app_info)) {
+            return false;
+        }
+        $db=self::__instance();
+        $condition=array("app_id"=>$app_id);
+        
+        $id = $db->update ( self::getTableName(), $app_info, $condition );
         return $id;
     }
 

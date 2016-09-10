@@ -27,7 +27,7 @@
 			<label>应用版本</label>
 			<input type="text" name="app_version" value="<{if $_POST.app_version=='' }>1.0.0<{else}><{$_POST.app_version}><{/if}>" class="input-xlarge" required="true" >
 			<label>应用作者</label>
-			<input type="text" name="app_author" readonly="readonly" value="<{$userInfo.user_name}>" class="input-xlarge" required pattern="\d{11}">
+			<input type="text" name="app_author" readonly="readonly" value="<{$userInfo.user_name}>" class="input-xlarge" required>
 			<label>应用图标</label>
 			<input type="text" name="app_icon" value="<{$_POST.app_icon}>"  class="input-xlarge" required="true" >
 			<label>应用说明</label>

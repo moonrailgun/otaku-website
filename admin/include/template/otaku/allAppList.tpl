@@ -38,7 +38,7 @@
 				<td><{$app.app_updatedTime}></td>
 				<{if $isShowModify == true}>
 				<td>
-				<a href="app_modify.php?app_id=<{$app.app_id}>" title= "修改" ><i class="icon-pencil"></i></a>
+				<a href="app_profile.php?app_id=<{$app.app_id}>" title= "修改" ><i class="icon-pencil"></i></a>
 				<a data-toggle="modal" href="#myModal" title= "删除" ><i class="icon-remove" href="allAppList.php?page_no=<{$page_no}>&method=del&app_id=<{$app.app_id}>" ></i></a>
 				</td>
 				<{/if}>
