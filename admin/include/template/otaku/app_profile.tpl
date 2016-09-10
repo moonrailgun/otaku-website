@@ -23,7 +23,7 @@
 			<select name="app_type" class="input-xlarge">
 				<option value ="app" <{if $info.app_type == "app"}>selected<{/if}>>app</option>
 				<option value ="html" <{if $info.app_type == "html"}>selected<{/if}>>html</option>
-				<option value="fetch" <{if $info.app_type == "fetch"}>selected<{/if}>>fetch</option>
+				<!-- <option value="fetch" <{if $info.app_type == "fetch"}>selected<{/if}>>fetch</option> -->
 			</select>
 			<label>应用版本</label>
 			<input type="text" name="app_version" value="<{$info.app_version}>" class="input-xlarge" required="true" >
