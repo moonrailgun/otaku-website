@@ -13,6 +13,10 @@ if (empty($app_info)) {
 
 if (Common::isPost()) {
     //提交修改
+    $info = App::getAppInfoById($app_id);
+    if ($info["owner_id"] != UserSession::getUserId()) {
+        Common::exitWithError('不是你的应用,无法修改', Common::getActionUrl());
+    }
     if ($app_id == '' || $app_name == '' || $app_type == '' || $app_version == '') {
         OSAdmin::alert("error", ErrorMessage::NEED_PARAM);
     } else {
@@ -26,7 +30,7 @@ if (Common::isPost()) {
             'app_screenshots' => $app_screenshots_json,
             'app_updatedTime' => $timeNow,
         );
-        
+
         $res = App::updateApp($app_id, $update_data);
         if ($res > 0) {
             SysLog::addLog(UserSession::getUserName(), 'MODIFY', 'App', $app_id, json_encode($update_data));

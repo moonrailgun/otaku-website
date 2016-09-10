@@ -34,7 +34,7 @@
 				<td><{$app.app_version}></td>
 				<td><{$app.app_author}></td>
 				<td><{$app.app_description}></td>
-				<td><a class="btn btn-small" href="<{$admin_url}>/<{$app.app_file}>">下载</a></td>
+				<td><a class="btn btn-small" href="<{$smarty.const.ADMIN_URL}>/<{$app.app_file}>">下载</a></td>
 				<td><{$app.app_updatedTime}></td>
 				<{if $isShowModify == true}>
 				<td>
