@@ -1,6 +1,6 @@
 <?php
 require '../include/init.inc.php';
-$app_name = $app_type = $app_author = $app_version = $app_icon = $app_description = $app_screenshots_json = $owner_id ='';
+$app_name = $app_type = $app_author = $app_version = $app_icon = $app_description = $app_screenshots_json = $owner_id = '';
 
 extract($_POST, EXTR_IF_EXISTS);
 
@@ -16,10 +16,23 @@ if (Common::isPost()) {
                 $file_extend = pathinfo($_FILES["file"]["name"])["extension"]; //文件扩展名
                 $guid        = Common::guid();
                 if (is_uploaded_file($_FILES['file']['tmp_name']) && move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . '/../upload/' . $guid . "." . $file_extend)) {
-                    $file_path = '/upload/' . $guid . "." . $file_extend;
-
-                    $input_data = array('app_name' => $app_name, 'app_type' => $app_type, 'app_version' => $app_version, 'app_author' => $app_author, 'app_icon' => $app_icon, 'app_description' => $app_description, 'app_screenshots' => $app_screenshots_json, 'app_file' => $file_path, 'owner_id' => $owner_id);
-                    $app_id     = App::createApp($input_data);
+                    $file_path  = '/upload/' . $guid . "." . $file_extend;
+                    $timeNow    = date("Y-m-d h:i:s");
+                    $input_data = array(
+                        'app_name'        => $app_name,
+                        'app_type'        => $app_type,
+                        'app_version'     => $app_version,
+                        'app_author'      => $app_author,
+                        'app_icon'        => $app_icon,
+                        'app_description' => $app_description,
+                        'app_screenshots' => $app_screenshots_json,
+                        'app_file'        => $file_path,
+                        'app_size'        => $_FILES["file"]["size"],
+                        'owner_id'        => $owner_id,
+                        'app_createdTime' => $timeNow,
+                        'app_updatedTime' => $timeNow,
+                    );
+                    $app_id = App::createApp($input_data);
 
                     if ($app_id) {
                         SysLog::addLog(UserSession::getUserName(), 'ADD', 'App', $user_id, json_encode($input_data));

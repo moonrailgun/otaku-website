@@ -2,6 +2,10 @@
 <{include file ="navibar.tpl"}>
 <{include file ="sidebar.tpl"}>
 <{* TPLSTART 以上内容不需更改，保证该 TPL 页内的标签匹配即可 *}>
+
+<{$osadmin_action_alert}>
+<{$osadmin_quick_note}>
+
 <div class="block">
 	<a href="#page-stats" class="block-heading" data-toggle="collapse">应用列表</a>
 	<div id="page-stats" class="block-body collapse in">
@@ -15,6 +19,7 @@
 				<th>作者</th>
 				<th>描述</th>
 				<th>文件</th>
+				<th>更新时间</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -27,6 +32,7 @@
 				<td><{$app.app_author}></td>
 				<td><{$app.app_description}></td>
 				<td><a class="btn btn-small" href="<{$admin_url}>/<{$app.app_file}>">下载</a></td>
+				<td><{$app.app_updatedTime}></td>
 				</tr>
 			<{/foreach}>
 		  </tbody>

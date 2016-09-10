@@ -18,7 +18,12 @@
 			<label>应用名称</label>
 			<input type="text" name="app_name" value="<{$_POST.app_name}>" class="input-xlarge" autofocus="true" required="true" >
 			<label>应用类型</label>
-			<input type="text" name="app_type" value="<{$_POST.app_type}>" class="input-xlarge" required="true" >
+			<!-- <input type="text" name="app_type" value="<{$_POST.app_type}>" class="input-xlarge" required="true" > -->
+			<select name="app_type" class="input-xlarge">
+				<option value ="app">app</option>
+				<option value ="html">html</option>
+				<option value="fetch">fetch</option>
+			</select>
 			<label>应用版本</label>
 			<input type="text" name="app_version" value="<{if $_POST.app_version=='' }>1.0.0<{else}><{$_POST.app_version}><{/if}>" class="input-xlarge" required="true" >
 			<label>应用作者</label>
