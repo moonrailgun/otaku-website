@@ -61,7 +61,7 @@ if (Common::isPost()) {
         } else if ($app_type == "html") {
             //html
             if (!empty($app_url)) {
-                $zip_path               = App::createHtmlAppZip($app_name, $app_url);
+                $zip_path               = App::createHtmlAppZip($update_data, $app_url);
                 $update_data['app_file'] = $zip_path;
                 $update_data['app_size'] = filesize(Common::getSystemDir() . $zip_path);
 

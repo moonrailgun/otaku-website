@@ -113,10 +113,11 @@ class App extends OtakuBase
         return $result;
     }
 
-    public static function createHtmlAppZip($app_name,$app_url){
+    public static function createHtmlAppZip($app_info, $app_url)
+    {
         $user_id = UserSession::getUserId();
 
-        $project_file_path = Common::getSystemDir() . "/temp/" . $user_id . "/" . $app_name . "/otaku.project.json";
+        $project_file_path = Common::getSystemDir() . "/temp/" . $user_id . "/" . $app_info['app_name'] . "/otaku.project.json";
         if (!is_dir(dirname($project_file_path))) {
             //目录不存在
             //创建目录
@@ -128,10 +129,10 @@ class App extends OtakuBase
 
         $project_file = fopen($project_file_path, "w");
         $data         = array(
-            'name'        => $app_name,
-            'version'     => $app_version,
-            'type'        => $app_type,
-            'content'     => $app_url
+            'name'    => $app_info['app_name'],
+            'version' => $app_info['app_version'],
+            'type'    => $app_info['app_type'],
+            'content' => $app_url,
         );
         fwrite($project_file, json_encode($data));
         fclose($project_file);

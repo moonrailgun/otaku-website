@@ -46,7 +46,7 @@ if (Common::isPost()) {
                 Common::exitWithError(ErrorMessage::NEED_PARAM, "otaku/createApp.php");
             }
 
-            $zip_path               = App::createHtmlAppZip($app_name, $app_url);
+            $zip_path               = App::createHtmlAppZip($input_data, $app_url);
             $input_data['app_file'] = $zip_path;
             $input_data['app_size'] = filesize(Common::getSystemDir() . $zip_path);
         }

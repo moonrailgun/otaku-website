@@ -43,7 +43,7 @@
 			<{/if}>
 			<{if $info.app_type == "html"}>
 			<label>webapp入口网址<span class="label label-important" >如不修改请留空</span></label>
-			<input type="text" name="app_url" class="input-xlarge" required="true">
+			<input type="text" name="app_url" class="input-xlarge">
 			<span id="helpBlock" class="help-block">请填写完全入口网址</span>
 			<{/if}>
 			</div>
