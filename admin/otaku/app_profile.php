@@ -17,7 +17,7 @@ if (Common::isPost()) {
         OSAdmin::alert("error", ErrorMessage::NEED_PARAM);
     } else if ($app_info["owner_id"] != UserSession::getUserId() && !Common::isAdmin()) {
         OSAdmin::alert("error", "不是你的应用,无法修改");
-    } else if (!App::checkAppNameAvailable($app_name)) {
+    } else if (!App::checkAppNameAvailable($app_name, $app_id)) {
         OSAdmin::alert("error", ErrorMessage::EXIST_APP_NAME);
     } else {
         $timeNow     = date("Y-m-d h:i:s");

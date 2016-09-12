@@ -52,14 +52,19 @@ class App extends OtakuBase
         return array();
     }
 
-    public static function checkAppNameAvailable($app_name){
-        $db = self::__instance();
+    public static function checkAppNameAvailable($app_name, $app_id = -1)
+    {
+        $db        = self::__instance();
         $condition = array("AND" => array("app_name[=]" => $app_name));
-        $list = $db->select(self::getTableName(), "app_id", $condition);
+        $list      = $db->select(self::getTableName(), "app_id", $condition);
 
-        if(count($list)>0){
+        if (count($list) > 0) {
+            if ($app_id != -1 && $list[0]["app_id"] == $app_id) {
+                //若给出id是检查到的id的话。也可用
+                return true;
+            }
             return false;
-        }else{
+        } else {
             return true;
         }
     }
