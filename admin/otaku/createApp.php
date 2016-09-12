@@ -7,6 +7,8 @@ extract($_POST, EXTR_IF_EXISTS);
 if (Common::isPost()) {
     if ($app_name == '' || $app_type == '' || $app_version == '') {
         OSAdmin::alert("error", ErrorMessage::NEED_PARAM);
+    } else if (!App::checkAppNameAvailable($app_name)) {
+        OSAdmin::alert("error", ErrorMessage::EXIST_APP_NAME);
     } else {
         $timeNow    = date("Y-m-d h:i:s");
         $input_data = array(

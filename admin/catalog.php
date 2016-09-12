@@ -11,6 +11,7 @@ for($i = 0;$i < count($allAppList);$i++){
 	$tmp["type"] = $appInfo["app_type"];
 	$tmp["version"] = $appInfo["app_version"];
 	$tmp["author"] = $appInfo["app_author"];
+	$tmp["icon"] = $appInfo["app_icon"];
 	$tmp["description"] = $appInfo["app_description"];
 	$tmp["screenshots"] = $appInfo["app_screenshots"];
 	$tmp["file"] = ADMIN_URL.'/'.$appInfo["app_file"];

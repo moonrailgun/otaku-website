@@ -5,7 +5,7 @@
 
 <{$osadmin_action_alert}>
 <{$osadmin_quick_note}>
-    
+
 <div class="well">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">请填写应用信息</a></li>
@@ -29,7 +29,7 @@
 			<label>应用作者</label>
 			<input type="text" name="app_author" readonly="readonly" value="<{$userInfo.user_name}>" class="input-xlarge" required>
 			<label>应用图标</label>
-			<input type="text" name="app_icon" value="<{$_POST.app_icon}>"  class="input-xlarge" required="true" >
+			<input type="text" name="app_icon" value="<{$_POST.app_icon}>"  class="input-xlarge">
 			<label>应用说明</label>
 			<textarea name="app_description" rows="5" class="input-xlarge"><{$_POST.app_description}></textarea>
 			<label>应用快照</label>

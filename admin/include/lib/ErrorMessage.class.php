@@ -27,4 +27,6 @@ class ErrorMessage {
 	const GROUP_NOT_EXIST 	="账户组不存在";
 	const QUICKNOTE_NOT_EXIST 	="Quick note 不存在";
 	const ERROR_FILE_TYPE = "文件格式不正确";
+	const EXIST_APP_NAME = "应用名已被占用";
+	const APP_NOT_EXIST = "应用不存在";
 }

@@ -8,18 +8,17 @@ Common::checkParam($app_id);
 
 $app_info = App::getAppInfoById($app_id);
 if (empty($app_info)) {
-    Common::exitWithError(ErrorMessage::USER_NOT_EXIST, "panel/index.php");
+    Common::exitWithError(ErrorMessage::APP_NOT_EXIST, "panel/index.php");
 }
 
 if (Common::isPost()) {
     //提交修改
-    $info = App::getAppInfoById($app_id);
-    if ($info["owner_id"] != UserSession::getUserId() && !Common::isAdmin()) {
-        Common::exitWithError('不是你的应用,无法修改', Common::getActionUrl());
-    }
-
     if ($app_id == '' || $app_name == '' || $app_type == '' || $app_version == '') {
         OSAdmin::alert("error", ErrorMessage::NEED_PARAM);
+    } else if ($app_info["owner_id"] != UserSession::getUserId() && !Common::isAdmin()) {
+        OSAdmin::alert("error", "不是你的应用,无法修改");
+    } else if (!App::checkAppNameAvailable($app_name)) {
+        OSAdmin::alert("error", ErrorMessage::EXIST_APP_NAME);
     } else {
         $timeNow     = date("Y-m-d h:i:s");
         $update_data = array(
@@ -52,7 +51,7 @@ if (Common::isPost()) {
                             $update_data['app_size'] = $_FILES["file"]["size"];
 
                             //删除旧文件
-                            $old_file_path = $info['app_file'];
+                            $old_file_path = $app_info['app_file'];
                             App::delFile($old_file_path);
                         }
                     }
@@ -61,12 +60,12 @@ if (Common::isPost()) {
         } else if ($app_type == "html") {
             //html
             if (!empty($app_url)) {
-                $zip_path               = App::createHtmlAppZip($update_data, $app_url);
+                $zip_path                = App::createHtmlAppZip($update_data, $app_url);
                 $update_data['app_file'] = $zip_path;
                 $update_data['app_size'] = filesize(Common::getSystemDir() . $zip_path);
 
                 //删除旧文件
-                $old_file_path = $info['app_file'];
+                $old_file_path = $app_info['app_file'];
                 App::delFile($old_file_path);
             }
         }

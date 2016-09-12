@@ -16,7 +16,7 @@ class App extends OtakuBase
     public static function getAllAppList()
     {
         $db  = self::__instance();
-        $sql = "select " . self::$columns . " from " . self::getTableName();
+        $sql = "select " . self::$columns . " from " . self::getTableName() . " order by app_updatedTime desc";
 
         $list = $db->query($sql)->fetchAll();
         if ($list) {
@@ -50,6 +50,18 @@ class App extends OtakuBase
             return $list[0];
         }
         return array();
+    }
+
+    public static function checkAppNameAvailable($app_name){
+        $db = self::__instance();
+        $condition = array("AND" => array("app_name[=]" => $app_name));
+        $list = $db->select(self::getTableName(), "app_id", $condition);
+
+        if(count($list)>0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static function createApp($app_info)

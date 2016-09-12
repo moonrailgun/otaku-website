@@ -30,7 +30,7 @@
 			<label>应用作者</label>
 			<input type="text" name="app_author" readonly="readonly" value="<{$info.app_author}>" class="input-xlarge" required>
 			<label>应用图标</label>
-			<input type="text" name="app_icon" value="<{$info.app_icon}>"  class="input-xlarge" required="true" >
+			<input type="text" name="app_icon" value="<{$info.app_icon}>"  class="input-xlarge">
 			<label>应用说明</label>
 			<textarea name="app_description" rows="5" class="input-xlarge"><{$info.app_description}></textarea>
 			<label>应用快照</label>
