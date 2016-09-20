@@ -15,7 +15,8 @@ define('TEMPLATE_CONFIGS', ADMIN_BASE . '/config/');
 define('TEMPLATE_CACHE', ADMIN_BASE . '/cache/');
 
 // OSAdmin 常量
-define('ADMIN_URL' ,'http://otaku.moonrailgun.com/admin');
+//define('ADMIN_URL' ,'http://otaku.moonrailgun.com/admin');
+define('ADMIN_URL' ,'http://127.0.0.1:8080/admin');
 define('ADMIN_TITLE' ,'Otaku!管理后台');
 define('COMPANY_NAME' ,'Otaku!');
 
