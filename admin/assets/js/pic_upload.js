@@ -52,11 +52,11 @@ jQuery(function() {
             mimeTypes: 'image/*'
         },
         // swf文件路径
-        //swf: BASE_URL + '/js/Uploader.swf',
+        swf: 'http://cdn.staticfile.org/webuploader/0.1.0/Uploader.swf',
         disableGlobalDnd: true,
         chunked: true,
         // server: 'http://webuploader.duapp.com/server/fileupload.php',
-        server: 'http://2betop.net/fileupload.php',
+        // server: 'http://2betop.net/fileupload.php',
         fileNumLimit: 300,
         fileSizeLimit: 5 * 1024 * 1024, // 200 M
         fileSingleSizeLimit: 1 * 1024 * 1024 // 50 M
@@ -66,6 +66,7 @@ jQuery(function() {
         id: '#filePicker2',
         label: '继续添加'
     });
+
     // 当有文件添加进来时执行，负责view的创建
     function addFile(file) {
         var $li = $('<li id="' + file.id + '">' + '<p class="title">' + file.name + '</p>' + '<p class="imgWrap"></p>' + '<p class="progress"><span></span></p>' + '</li>'),
